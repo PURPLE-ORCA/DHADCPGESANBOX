@@ -21,7 +21,7 @@ export default function Show({ course }: Props) {
   const fetchSignedUrl = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`/video/${course.bunny_video_id}/url`);
+      const response = await axios.get(`/video/${course.id}/url`);
       setSignedUrl(response.data.url);
       setError(null);
     } catch (err) {

@@ -14,37 +14,29 @@ class VideoController extends Controller
     /**
      * Get a signed URL for a course video
      *
-     * @param int $courseId
+     * @param Course $course
      * @return JsonResponse
      */
-    public function getSignedUrl(int $courseId): JsonResponse
+    public function getSignedUrl(Course $course): JsonResponse
     {
-        $course = Course::find($courseId);
-        
-        if (!$course) {
-            return response()->json([
-                'error' => 'Course not found'
-            ], 404);
-        }
-        
         // Log video access
         try {
             VideoLog::create([
-                'course_id' => $courseId,
+                'course_id' => $course->id,
                 'user_id' => Auth::id(),
                 'accessed_at' => now()
             ]);
         } catch (\Exception $e) {
             // Log the error but don't prevent the video from being served
             Log::error('Failed to log video access', [
-                'course_id' => $courseId,
+                'course_id' => $course->id,
                 'user_id' => Auth::id(),
                 'error' => $e->getMessage()
             ]);
         }
-        
-        $signedUrl = VideoHelper::generateSignedUrl($course->video_id);
-        
+         
+        $signedUrl = VideoHelper::generateBunnySignedUrl($course->video_id);
+         
         return response()->json([
             'url' => $signedUrl
         ]);

@@ -8,6 +8,10 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('/home', function () {
+    return redirect()->route('dashboard');
+})->name('home');
+
 Route::get('/dashboard', function () {
     return inertia('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
