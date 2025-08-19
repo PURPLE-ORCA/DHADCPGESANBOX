@@ -16,7 +16,7 @@ class CourseSeeder extends Seeder
             [
                 'title' => 'Math 101',
                 'description' => 'Introduction to Mathematics',
-                'video_id' => 'bunny_math_101',
+                'video_id' => '3de51679-9398-4ce3-a9f7-9c52be1f2eb5',
             ],
             [
                 'title' => 'Physics Intro',
