@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +16,9 @@ Route::middleware('auth')->group(function () {
     // Course routes
     Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
     Route::get('/courses/{course}', [CourseController::class, 'show'])->name('courses.show');
+    
+    // Video routes
+    Route::get('/video/{course}/url', [VideoController::class, 'getSignedUrl'])->name('video.signed-url');
 });
 
 require __DIR__.'/settings.php';
